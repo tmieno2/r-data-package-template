@@ -1,0 +1,22 @@
+# Create datasets
+
+Here, we will use an external CSV file (named **sample_data.csv**) saved in **data-raw**, convert it to an `sf` object, and then save it as a dataset for the package.
+
+```{r}
+library(dplyr)
+library(sf)
+
+sample_data_sf <- 
+  readr::read_csv("data-raw/sample_data.csv") %>%
+  st_as_sf(coords = c("X", "Y"), crs = 4326)
+```
+
+You can now use `usethis::use_data()` to save this dataset as an **rda** file. When you run the function for the first time, it will automatically create a folder called **data** and then the data is stored there.
+
+```{r}
+usethis::use_data(sample_data_sf, overwrite = TRUE)
+```
+
+Notice that the data file would be named **`R-object name`.rda** (Here, **sample_data_sf.rda**).
+
+Now that you have created a data file for this package, you need to describe it. For this purpose, create a file named **data.R** under the **R** folder.

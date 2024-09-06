@@ -1,0 +1,56 @@
+# preparation
+
+## Install packages
+
+Install the following packages if you have not.
+
+```{r, eval = FALSE}
+install.install.packages("usethis")
+install.install.packages("devtools")
+```
+
+## Load packages
+
+```{r}
+library(devtools)
+library(usethis)
+```
+
+# Build the package
+
+## Pick the license
+
+Here, we use the MIT license. See other license types [here](https://usethis.r-lib.org/reference/licenses.html).
+
+```{r}
+usethis::use_mit_license()
+```
+
+This will add a **License: ...** line in the **DESCRIPTION** file.
+
+## Create data-raw folder to store raw datasets 
+
+If you are creating datasets from raw datasets that are obtained externally, you can store them in a folder called **data_raw**, which is created by running the following code. Running the code also generates a file named **DATASET.R**.
+
+```{r}
+usethis::use_data_raw()
+```
+
+In this example package, I stored **sample_data.csv** in **data-raw**, which will be used later in generating a dataset that is going to be part of this data package.
+
+## Create datasets
+
+Inside **DATASET.R**, you can write R codes to generate datasets. But, you do not really have to use this file. You can just create a new one for this purpose. Here, I will create a file named **gen_data.qmd** under the **data-raw** folder. Go visit the file and come back here once you are done creating a dataset there.
+
+## Create (update) documentation
+
+```{r}
+devtools::document()
+```
+
+## Check
+
+```{r}
+devtools::load_all()
+data(sample_data_sf)
+```
